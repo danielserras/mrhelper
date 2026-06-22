@@ -1,0 +1,23 @@
+#logo {
+    padding: 0;
+    color: $accent;
+    height: auto;
+    width: auto;
+    margin: 0;
+}
+
+#table-container {
+    height: 1fr;
+    width: 1fr;
+    padding: 1;
+}
+
+DataTable {
+    height: 1fr;
+}
+
+#author-label {
+    text-align: center;
+    padding: 1 0;
+    color: $text-muted;
+}

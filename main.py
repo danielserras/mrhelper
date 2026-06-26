@@ -3,10 +3,12 @@ import argparse
 from app import MRHelper
 from config import load_env_config, setup_env
 import os
+from version import __version__
 
 def print_help():
-    print("""
+    print(f"""
 MrHelper - GitLab Merge Request Monitor
+Version: {__version__}
 Usage: python main.py [command]
 
 Commands:
@@ -24,6 +26,7 @@ Key Controls (in app):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("-v", "--version", action="store_true", help="Show version")
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
     
     subparsers.add_parser("run", help="Start the application")
@@ -38,7 +41,9 @@ if __name__ == "__main__":
     else:
         env_path = os.path.join(os.path.dirname(__file__), ".env")
 
-    if args.command == "config":
+    if args.version:
+        print(f"MrHelper {__version__}")
+    elif args.command == "config":
         setup_env(env_path)
     elif args.command == "help":
         print_help()

@@ -2,6 +2,8 @@ from textual.app import ComposeResult
 from textual.containers import Container
 from textual.widgets import Header, Footer, Static, DataTable, Input
 
+from ui.footer import build_footer_label
+
 
 def create_table() -> DataTable:
     table = DataTable()
@@ -23,10 +25,10 @@ def add_columns(table: DataTable) -> None:
     table.add_column("Compile", key="compile")
 
 
-def build_layout(table: DataTable, status: Static) -> ComposeResult:
+def build_layout(table: DataTable, status: Static, gitlab_username: str | None = None) -> ComposeResult:
     yield Header()
     yield Footer()
     yield status
     yield Input(placeholder="Search MRs (title, author)... (Press Enter to search)", id="search-input")
     yield Container(table, id="table-container", classes="grow")
-    yield Static("© Daniel Serras", id="author-label")
+    yield Static(build_footer_label(), id="author-label")

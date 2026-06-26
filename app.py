@@ -12,6 +12,7 @@ from textual.containers import Container
 from client.GitLabClient import GitLabClient
 from models.MergeRequest import MergeRequest
 from ui.MergeRequestRow import MergeRequestRow
+from ui.footer import build_footer_label
 from ui.layout import build_layout, create_table, add_columns
 
 class MRHelper(App):
@@ -59,7 +60,11 @@ class MRHelper(App):
         yield self.status
         yield Input(placeholder="Search MRs (title, author)... (Press Enter to search)", id="search-input")
         yield Container(self.table, id="table-container", classes="grow")
-        yield Static("github.com/danielserras", id="author-label")
+        yield Static(self.footer_label, id="author-label")
+
+    @property
+    def footer_label(self) -> str:
+        return build_footer_label()
 
     async def on_mount(self) -> None:
         self.set_focus(self.table)
